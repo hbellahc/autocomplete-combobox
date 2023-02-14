@@ -1,11 +1,12 @@
 package com.example.application.data.service;
 
 import com.example.application.data.entity.SampleBook;
-import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class SampleBookService {
@@ -40,4 +41,7 @@ public class SampleBookService {
         return (int) repository.count();
     }
 
+    public Page<SampleBook> search(String searchWord, Pageable pageable) {
+        return repository.findByNameContainsIgnoreCase(searchWord, pageable);
+    }
 }
